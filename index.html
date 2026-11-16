@@ -19,12 +19,13 @@ html {
 }
 
 :root {
-  --bg-color: #fbfaf8; /* Subtle Ivory */
-  --surface: #ffffff;
-  --text-main: #3a3532; /* Soft Charcoal */
-  --text-light: #7a726d;
-  --accent: #9e7f75; /* Elegant Dusty Rose / Taupe */
-  --border: rgba(158, 127, 117, 0.2);
+  /* NEW BEIGE & PINK PALETTE */
+  --bg-color: #f5e6e1; /* Soft blush beige for the main background */
+  --surface: #fcf5f2; /* Warm creamy pink-alabaster for cards/sections */
+  --text-main: #4a3b38; /* Warm dark charcoal/brown */
+  --text-light: #8a7b76; /* Soft taupe */
+  --accent: #ad7c72; /* Deeper dusty rose */
+  --border: rgba(173, 124, 114, 0.25);
 }
 
 body {
@@ -69,7 +70,7 @@ h1, h2, h3, .serif {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--bg-color);
+  background: linear-gradient(135deg, #fcf5f2 0%, #f5e6e1 100%);
   transition: opacity 1s ease, transform 1s ease;
 }
 
@@ -85,7 +86,7 @@ h1, h2, h3, .serif {
   width: 90%;
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+  box-shadow: 0 15px 40px rgba(74, 59, 56, 0.05);
   border-radius: 8px;
 }
 
@@ -113,7 +114,7 @@ h1, h2, h3, .serif {
 .open-btn:hover {
   background: var(--text-main);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(74, 59, 56, 0.15);
 }
 
 /* Main Layout */
@@ -142,6 +143,7 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(circle at center, #fcf5f2 0%, transparent 70%);
 }
 
 .hero-divider {
@@ -222,6 +224,7 @@ section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(173, 124, 114, 0.05);
 }
 
 .time-box strong {
@@ -286,46 +289,46 @@ section {
   color: var(--text-light);
 }
 
-/* PASTEL EVENT COLORS */
+/* PASTEL EVENT COLORS (Slightly adjusted to blend with beige) */
 .event-haldi {
-  background: linear-gradient(145deg, #fffdf5, #fff7d6);
-  border-color: #f0dfa1;
+  background: linear-gradient(145deg, #fffcf0, #fcf4cf);
+  border-color: #e8d799;
 }
 .event-haldi:hover {
   border-color: #d1b854;
   box-shadow: 0 15px 35px rgba(209, 184, 84, 0.15);
 }
-.event-haldi .event-icon, .event-haldi .time { color: #c49a12; }
+.event-haldi .event-icon, .event-haldi .time { color: #b88f0a; }
 
 .event-mehendi {
-  background: linear-gradient(145deg, #f6fcf6, #e7f5e7);
-  border-color: #c7e3c7;
+  background: linear-gradient(145deg, #f2fbf2, #e0f2e0);
+  border-color: #b8deb8;
 }
 .event-mehendi:hover {
   border-color: #92bf92;
   box-shadow: 0 15px 35px rgba(146, 191, 146, 0.15);
 }
-.event-mehendi .event-icon, .event-mehendi .time { color: #6b9e6b; }
+.event-mehendi .event-icon, .event-mehendi .time { color: #5f965f; }
 
 .event-sangeet {
-  background: linear-gradient(145deg, #faf7fc, #efebf5);
-  border-color: #dad1e8;
+  background: linear-gradient(145deg, #f7f2fb, #ebe3f2);
+  border-color: #d1c4e0;
 }
 .event-sangeet:hover {
   border-color: #af9ecc;
   box-shadow: 0 15px 35px rgba(175, 158, 204, 0.15);
 }
-.event-sangeet .event-icon, .event-sangeet .time { color: #8367a8; }
+.event-sangeet .event-icon, .event-sangeet .time { color: #795d9c; }
 
 .event-wedding {
-  background: linear-gradient(145deg, #fffafa, #fceeed);
-  border-color: #f0d1cf;
+  background: linear-gradient(145deg, #fff7f7, #f7e6e5);
+  border-color: #e8c5c3;
 }
 .event-wedding:hover {
   border-color: #d69894;
   box-shadow: 0 15px 35px rgba(214, 152, 148, 0.15);
 }
-.event-wedding .event-icon, .event-wedding .time { color: #b86e69; }
+.event-wedding .event-icon, .event-wedding .time { color: #b0625d; }
 
 /* Venue */
 .venue-section {
@@ -356,6 +359,7 @@ section {
 .closing {
   padding: 120px 20px 80px;
   background: var(--surface);
+  border-top: 1px solid var(--border);
 }
 
 .closing h2 {
@@ -381,7 +385,7 @@ section {
   display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 20px rgba(173, 124, 114, 0.15);
   transition: all 0.3s ease;
 }
 
@@ -408,6 +412,7 @@ section {
   height: 45px;
   font-size: 18px;
   transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(74, 59, 56, 0.2);
 }
 
 #backTop:hover {
