@@ -5,11 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const welcomeScreen = document.getElementById("welcomeScreen");
   const invitation = document.getElementById("invitation");
 
+  // Wedding music
   const music = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
 
   // Update music button appearance
   function updateMusicButton() {
+    if (!music || !musicToggle) return;
+
     if (music.paused) {
       musicToggle.textContent = "♫";
       musicToggle.classList.remove("playing");
@@ -27,49 +30,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start music
   async function playMusic() {
+    if (!music) return;
+
     try {
       await music.play();
       updateMusicButton();
     } catch (error) {
-      console.log("Music playback was blocked or unavailable:", error);
-      musicToggle.classList.add("paused");
-      musicToggle.style.display = "flex";
+      console.log("Music playback failed:", error);
+      updateMusicButton();
     }
   }
 
   // Opening invitation
-  openButton.addEventListener("click", function () {
+  if (openButton) {
+    openButton.addEventListener("click", function () {
 
-    welcomeScreen.classList.add("closed");
-    invitation.classList.add("visible");
+      if (welcomeScreen) {
+        welcomeScreen.classList.add("closed");
+      }
 
-    document.body.style.overflow = "auto";
+      if (invitation) {
+        invitation.classList.add("visible");
+      }
 
-    setTimeout(function () {
-      welcomeScreen.style.display = "none";
-    }, 850);
+      document.body.style.overflow = "auto";
 
-    // Start music after the visitor clicks
-    playMusic();
+      setTimeout(function () {
+        if (welcomeScreen) {
+          welcomeScreen.style.display = "none";
+        }
+      }, 850);
 
-    // Start countdown
-    updateCountdown();
-  });
+      // Start wedding music after visitor clicks
+      playMusic();
+
+      // Start countdown
+      updateCountdown();
+    });
+  }
 
   // Music play/pause control
-  musicToggle.addEventListener("click", function () {
+  if (musicToggle && music) {
+    musicToggle.addEventListener("click", function () {
 
-    if (music.paused) {
-      playMusic();
-    } else {
-      music.pause();
-      updateMusicButton();
-    }
+      if (music.paused) {
+        playMusic();
+      } else {
+        music.pause();
+        updateMusicButton();
+      }
 
-  });
+    });
 
-  music.addEventListener("play", updateMusicButton);
-  music.addEventListener("pause", updateMusicButton);
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+    music.addEventListener("ended", updateMusicButton);
+  }
+
+  updateMusicButton();
 
   // Wedding countdown
   function updateCountdown() {
@@ -80,11 +98,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const now = Date.now();
     const difference = weddingDate - now;
 
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
     if (difference <= 0) {
-      document.getElementById("days").textContent = "00";
-      document.getElementById("hours").textContent = "00";
-      document.getElementById("minutes").textContent = "00";
-      document.getElementById("seconds").textContent = "00";
+      if (daysElement) daysElement.textContent = "00";
+      if (hoursElement) hoursElement.textContent = "00";
+      if (minutesElement) minutesElement.textContent = "00";
+      if (secondsElement) secondsElement.textContent = "00";
       return;
     }
 
@@ -104,15 +127,22 @@ document.addEventListener("DOMContentLoaded", function () {
       (difference / 1000) % 60
     );
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent =
-      String(hours).padStart(2, "0");
-    document.getElementById("minutes").textContent =
-      String(minutes).padStart(2, "0");
-    document.getElementById("seconds").textContent =
-      String(seconds).padStart(2, "0");
+    if (daysElement) daysElement.textContent = days;
+
+    if (hoursElement) {
+      hoursElement.textContent = String(hours).padStart(2, "0");
+    }
+
+    if (minutesElement) {
+      minutesElement.textContent = String(minutes).padStart(2, "0");
+    }
+
+    if (secondsElement) {
+      secondsElement.textContent = String(seconds).padStart(2, "0");
+    }
   }
 
+  // Update countdown every second
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
