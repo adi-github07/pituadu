@@ -251,24 +251,19 @@ section {
 
 .event-card {
   padding: 50px 30px;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
   transition: all 0.4s ease;
   position: relative;
+  border: 1px solid transparent;
 }
 
 .event-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-  border-color: var(--accent);
 }
 
 .event-icon {
   font-family: 'Great Vibes', cursive;
   font-size: 35px;
-  color: var(--accent);
   margin-bottom: 15px;
   display: block;
 }
@@ -282,7 +277,6 @@ section {
 .event-card .time {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  color: var(--accent);
   margin: 10px 0;
   font-size: 16px;
 }
@@ -291,6 +285,47 @@ section {
   font-size: 12px;
   color: var(--text-light);
 }
+
+/* PASTEL EVENT COLORS */
+.event-haldi {
+  background: linear-gradient(145deg, #fffdf5, #fff7d6);
+  border-color: #f0dfa1;
+}
+.event-haldi:hover {
+  border-color: #d1b854;
+  box-shadow: 0 15px 35px rgba(209, 184, 84, 0.15);
+}
+.event-haldi .event-icon, .event-haldi .time { color: #c49a12; }
+
+.event-mehendi {
+  background: linear-gradient(145deg, #f6fcf6, #e7f5e7);
+  border-color: #c7e3c7;
+}
+.event-mehendi:hover {
+  border-color: #92bf92;
+  box-shadow: 0 15px 35px rgba(146, 191, 146, 0.15);
+}
+.event-mehendi .event-icon, .event-mehendi .time { color: #6b9e6b; }
+
+.event-sangeet {
+  background: linear-gradient(145deg, #faf7fc, #efebf5);
+  border-color: #dad1e8;
+}
+.event-sangeet:hover {
+  border-color: #af9ecc;
+  box-shadow: 0 15px 35px rgba(175, 158, 204, 0.15);
+}
+.event-sangeet .event-icon, .event-sangeet .time { color: #8367a8; }
+
+.event-wedding {
+  background: linear-gradient(145deg, #fffafa, #fceeed);
+  border-color: #f0d1cf;
+}
+.event-wedding:hover {
+  border-color: #d69894;
+  box-shadow: 0 15px 35px rgba(214, 152, 148, 0.15);
+}
+.event-wedding .event-icon, .event-wedding .time { color: #b86e69; }
 
 /* Venue */
 .venue-section {
@@ -493,7 +528,8 @@ footer {
     <p class="eyebrow">Four Moments · One Story</p>
 
     <div class="event-container">
-      <div class="event-card">
+      
+      <div class="event-card event-haldi">
         <span class="event-icon">✧</span>
         <h3 class="serif">Haldi</h3>
         <p class="eyebrow">2 January 2027</p>
@@ -501,7 +537,7 @@ footer {
         <p>A morning of traditions, laughter, and blessings to start our journey.</p>
       </div>
 
-      <div class="event-card">
+      <div class="event-card event-mehendi">
         <span class="event-icon">❀</span>
         <h3 class="serif">Mehendi</h3>
         <p class="eyebrow">2 January 2027</p>
@@ -509,7 +545,7 @@ footer {
         <p>An intimate evening of beautiful henna patterns and celebration.</p>
       </div>
 
-      <div class="event-card">
+      <div class="event-card event-sangeet">
         <span class="event-icon">♪</span>
         <h3 class="serif">Sangeet</h3>
         <p class="eyebrow">3 January 2027</p>
@@ -517,13 +553,14 @@ footer {
         <p>Music, dance, and unforgettable memories at Vidyadhiraj Bhavan.</p>
       </div>
 
-      <div class="event-card">
+      <div class="event-card event-wedding">
         <span class="event-icon">♡</span>
         <h3 class="serif">Wedding</h3>
         <p class="eyebrow">4 January 2027</p>
         <p class="time">12:00 PM</p>
         <p>Two souls, one promise, a lifetime together at Vidyadhiraj Bhavan.</p>
       </div>
+
     </div>
   </section>
 
