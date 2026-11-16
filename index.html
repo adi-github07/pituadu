@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya ❤️ Preeti | Wedding Invitation</title>
+<title>Aditya & Preeti | Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -18,11 +18,21 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --bg-color: #fbfaf8; /* Subtle Ivory */
+  --surface: #ffffff;
+  --text-main: #3a3532; /* Soft Charcoal */
+  --text-light: #7a726d;
+  --accent: #9e7f75; /* Elegant Dusty Rose / Taupe */
+  --border: rgba(158, 127, 117, 0.2);
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background: #fdfaf6;
-  color: #2d3436;
+  background: var(--bg-color);
+  color: var(--text-main);
   overflow-x: hidden;
+  line-height: 1.8;
 }
 
 button {
@@ -30,26 +40,27 @@ button {
   font-family: inherit;
 }
 
-/* Animations */
-@keyframes morph {
-  0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+/* Typography */
+h1, h2, h3, .serif {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+.script {
+  font-family: 'Great Vibes', cursive;
+  color: var(--accent);
+  font-weight: 400;
 }
 
-@keyframes gradientBg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
-/* Welcome screen */
+/* Welcome Screen */
 #welcomeScreen {
   position: fixed;
   inset: 0;
@@ -58,76 +69,58 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(45deg, #ffd1ff, #ffdfc4, #c6e2ff, #c1e1c5);
-  background-size: 300% 300%;
-  animation: gradientBg 12s ease infinite;
-  transition: opacity .8s ease, transform .8s ease;
+  background: var(--bg-color);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 #welcomeScreen.closed {
   opacity: 0;
-  transform: scale(1.1);
+  transform: scale(1.02);
   pointer-events: none;
 }
 
 .welcome-card {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   padding: 60px 40px;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-  animation: morph 8s ease-in-out infinite;
   max-width: 550px;
   width: 90%;
-}
-
-.welcome-card .small {
-  letter-spacing: 5px;
-  font-size: 12px;
-  color: #555;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+  border-radius: 8px;
 }
 
 .welcome-card h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(55px, 10vw, 90px);
-  color: #d63031;
-  margin: 15px 0;
-  font-weight: 400;
-  text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-}
-
-.welcome-card p {
-  font-size: 13px;
-  letter-spacing: 2px;
-  line-height: 2;
-  font-weight: 500;
+  font-size: clamp(55px, 10vw, 85px);
+  color: var(--accent);
+  margin: 20px 0;
+  line-height: 1;
 }
 
 .open-btn {
-  margin-top: 35px;
-  padding: 14px 35px;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  color: #d63031;
+  margin-top: 40px;
+  padding: 14px 40px;
+  background: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 50px;
+  border-radius: 4px;
   letter-spacing: 2px;
-  font-weight: 600;
-  transition: .3s;
-  box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
+  font-size: 11px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
 }
 
 .open-btn:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6);
+  background: var(--text-main);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Main invitation */
+/* Main Layout */
 #invitation {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease;
+  transition: opacity 1.5s ease;
 }
 
 #invitation.visible {
@@ -138,438 +131,416 @@ button {
 section {
   padding: 100px 20px;
   text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
+/* Hero */
 .hero {
   min-height: 90vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  position: relative;
-  background: radial-gradient(circle at top, #fff0f5, transparent 70%), 
-              radial-gradient(circle at bottom, #e0ffff, transparent 70%);
 }
 
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: #b2bec3;
-  text-transform: uppercase;
-  font-weight: 600;
+.hero-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--accent);
+  margin: 30px auto;
+  opacity: 0.5;
 }
 
 .hero h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(65px, 12vw, 115px);
-  font-weight: 400;
-  color: #ff7675;
-  line-height: 1.25;
-  margin: 25px 0;
-  text-shadow: 3px 3px 0px rgba(255, 234, 167, 0.6);
+  font-size: clamp(40px, 8vw, 65px);
+  letter-spacing: 2px;
+  margin: 20px 0;
+  line-height: 1.3;
 }
 
-.heart {
-  color: #fd79a8;
-  font-size: 28px;
-  margin: 5px;
-  display: inline-block;
-  animation: float 3s ease-in-out infinite;
+.hero h1 span {
+  font-family: 'Great Vibes', cursive;
+  color: var(--accent);
+  font-size: 1.2em;
+  padding: 0 15px;
+  font-weight: 400;
 }
 
 .hero .date {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: 18px;
   letter-spacing: 4px;
-  color: #2d3436;
   margin-top: 15px;
 }
 
-.hero .venue {
-  font-size: 14px;
-  line-height: 2;
-  margin-top: 20px;
-  color: #636e72;
+/* Formal Parents Section */
+.parents-section {
+  background: var(--surface);
+  padding: 80px 20px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .section-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 60px;
-  font-weight: 400;
-  color: #e84393;
+  font-size: 42px;
+  color: var(--text-main);
   margin-bottom: 15px;
 }
 
-.section-subtitle {
-  font-size: 12px;
-  letter-spacing: 3px;
-  color: #a29bfe;
-  margin-bottom: 45px;
-  font-weight: 600;
-}
-
-/* Countdown */
-.countdown {
-  background: linear-gradient(to bottom, transparent, #fff9f9);
-}
-
-.countdown-grid {
+.parents-grid {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 60px;
+  margin-top: 50px;
   flex-wrap: wrap;
 }
 
-.time-box {
-  background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-  border-radius: 50%;
-  width: 110px;
-  height: 110px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 15px 30px rgba(168, 230, 207, 0.4);
-  animation: float 4s ease-in-out infinite;
+.parent-block h3 {
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 10px;
 }
-.time-box:nth-child(2) { background: linear-gradient(135deg, #ffd3b6, #ffaaa5); animation-delay: 0.5s; box-shadow: 0 15px 30px rgba(255, 170, 165, 0.4);}
-.time-box:nth-child(3) { background: linear-gradient(135deg, #ff8b94, #ffaaa5); animation-delay: 1s; box-shadow: 0 15px 30px rgba(255, 139, 148, 0.4);}
-.time-box:nth-child(4) { background: linear-gradient(135deg, #a29bfe, #81ecec); animation-delay: 1.5s; box-shadow: 0 15px 30px rgba(162, 155, 254, 0.4);}
+
+.parent-block p {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 2;
+}
+
+/* Countdown */
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.time-box {
+  width: 90px;
+  padding: 20px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
 
 .time-box strong {
   display: block;
   font-family: 'Playfair Display', serif;
   font-size: 32px;
-  color: #2d3436;
+  color: var(--accent);
+  font-weight: 400;
   line-height: 1;
 }
 
 .time-box span {
   font-size: 10px;
   letter-spacing: 2px;
-  color: #636e72;
-  margin-top: 5px;
+  color: var(--text-light);
+  margin-top: 8px;
+  display: block;
 }
 
-/* Events */
-.events {
-  background: transparent;
-}
-
+/* Modern Events Cards */
 .event-container {
-  max-width: 1000px;
-  margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
 }
 
 .event-card {
-  padding: 40px 25px;
-  border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
-  transition: all .4s ease;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  padding: 50px 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: all 0.4s ease;
   position: relative;
 }
 
 .event-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  border-radius: 40% 60% 40% 60% / 60% 40% 50% 50%;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+  border-color: var(--accent);
 }
 
-.event-card .emoji {
-  font-size: 45px;
+.event-icon {
+  font-family: 'Great Vibes', cursive;
+  font-size: 35px;
+  color: var(--accent);
   margin-bottom: 15px;
-  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+  display: block;
 }
 
 .event-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.event-card .time {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 15px;
+  font-style: italic;
+  color: var(--accent);
+  margin: 10px 0;
+  font-size: 16px;
 }
 
 .event-card p {
-  font-size: 13px;
-  line-height: 2;
-  font-weight: 500;
-}
-
-.haldi {
-  background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-  color: #d35400;
-}
-.mehendi {
-  background: linear-gradient(135deg, #55efc4, #81ecec);
-  color: #00b894;
-}
-.sangeet {
-  background: linear-gradient(135deg, #a29bfe, #fd79a8);
-  color: #fff;
-}
-.wedding {
-  background: linear-gradient(135deg, #ff7675, #fab1a0);
-  color: #fff;
+  font-size: 12px;
+  color: var(--text-light);
 }
 
 /* Venue */
 .venue-section {
-  background: radial-gradient(circle at center, #fff0f5, transparent);
-  margin-top: 50px;
-}
-
-.venue-section h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  margin: 15px 0;
-  color: #e84393;
+  border-top: 1px solid var(--border);
+  padding: 100px 20px;
 }
 
 .map-link {
   display: inline-block;
   margin-top: 30px;
   padding: 14px 35px;
-  color: white;
-  background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-  border-radius: 50px;
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+  border-radius: 4px;
   text-decoration: none;
-  font-size: 13px;
-  letter-spacing: 1px;
-  box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
-  transition: 0.3s;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: 0.4s ease;
 }
 
 .map-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(108, 92, 231, 0.5);
+  background: var(--text-main);
+  color: #fff;
 }
 
 /* Closing */
 .closing {
-  background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  padding: 120px 20px;
+  padding: 120px 20px 80px;
+  background: var(--surface);
 }
 
 .closing h2 {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(50px, 8vw, 75px);
+  font-size: clamp(50px, 8vw, 70px);
+  color: var(--accent);
   font-weight: 400;
-  color: #d63031;
 }
 
-.closing p {
-  margin-top: 15px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: 600;
-}
-
-/* Music button */
+/* Interactive Elements */
 #musicToggle {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 30px;
+  right: 30px;
   z-index: 500;
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #fd79a8, #e84393);
-  color: white;
-  font-size: 23px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 20px;
   display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(232, 67, 147, 0.5);
-  transition: 0.3s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
 #musicToggle:hover {
-  transform: scale(1.1);
+  background: var(--accent);
+  color: #fff;
 }
 
 #musicToggle.playing {
-  animation: musicPulse 2s infinite;
+  border-color: var(--accent);
 }
 
-@keyframes musicPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 67, 147, 0.4); }
-  50% { box-shadow: 0 0 0 15px rgba(232, 67, 147, 0); }
-}
-
-/* Back to top */
 #backTop {
   display: none;
   position: fixed;
   bottom: 95px;
-  right: 25px;
+  right: 30px;
   z-index: 500;
-  background: #2d3436;
+  background: var(--text-main);
   color: white;
   border: none;
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  font-size: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+#backTop:hover {
+  background: var(--accent);
 }
 
 footer {
   padding: 30px;
   text-align: center;
-  font-size: 12px;
-  color: #636e72;
-  background: #fdfaf6;
-  letter-spacing: 1px;
+  font-size: 11px;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--bg-color);
+}
+
+/* Scroll Fade Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media(max-width: 600px) {
-  section { padding: 70px 18px; }
-  .time-box {
-    width: 85px;
-    height: 85px;
-  }
+  section { padding: 70px 20px; }
+  .parents-grid { gap: 40px; flex-direction: column; }
+  .time-box { width: 75px; padding: 15px 0; }
   .time-box strong { font-size: 24px; }
-  .event-container { grid-template-columns: 1fr; max-width: 320px; }
+  .event-container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Welcome screen -->
+<!-- Welcome Screen -->
 <div id="welcomeScreen">
   <div class="welcome-card">
-    <p class="small">TOGETHER WITH THEIR FAMILIES</p>
+    <p class="eyebrow" style="margin-bottom: 15px;">Together with their families</p>
     <h1>Aditya & Preeti</h1>
-    <p>REQUEST THE PLEASURE OF YOUR COMPANY</p>
-    <p>AS THEY BEGIN THEIR FOREVER</p>
+    <p class="eyebrow">Request the honor of your presence</p>
     <button class="open-btn" id="openInvitation">
-      OPEN INVITATION ♥
+      Open Invitation
     </button>
   </div>
 </div>
 
-<!-- Music (Your implementation is perfect!) -->
+<!-- Audio -->
 <audio id="weddingMusic" loop preload="auto">
   <source src="./song.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicToggle" class="paused"
-  aria-label="Play music" aria-pressed="false">♫</button>
+<button id="musicToggle" class="paused" aria-label="Play music" aria-pressed="false">♫</button>
 
-<!-- Invitation -->
+<!-- Main Invitation -->
 <main id="invitation">
 
   <!-- Hero -->
-  <section class="hero">
-    <p class="eyebrow">A beautiful beginning</p>
-    <h1>Aditya <span class="heart">♥</span> Preeti</h1>
-    <p class="eyebrow">Two hearts · One forever</p>
-    <p class="date">04 . 01 . 2027</p>
-    <p class="venue">
-      Monday · 12:00 PM<br>
-      Vidyadhiraj Bhavan, Navanagar, Hubli
-    </p>
+  <section class="hero fade-in">
+    <p class="eyebrow">The Wedding Celebration Of</p>
+    <h1>Aditya <span>&</span> Preeti</h1>
+    <div class="hero-divider"></div>
+    <p class="date serif">04 . 01 . 2027</p>
+    <p class="eyebrow" style="margin-top: 20px;">Vidyadhiraj Bhavan, Hubli</p>
   </section>
 
-  <!-- Parents -->
-  <section class="parents">
-    <h2 class="section-title">With the blessings of our families</h2>
-    <p class="section-subtitle">A NEW CHAPTER BEGINS</p>
-    <p class="date" style="color: #636e72; font-size: 22px;">
-      Umesh Bhende & Apporva Bhende
-    </p>
-    <p style="margin-top:20px;font-size:13px;color:#a29bfe;font-weight: 500;">
-      Together with our loved ones, we invite you to celebrate our wedding.
-    </p>
-  </section>
+  <!-- Formal Parents Section -->
+  <div class="parents-section fade-in">
+    <section style="padding: 0;">
+      <h2 class="script" style="font-size: 45px; margin-bottom: 10px;">With Love & Blessings</h2>
+      <p class="eyebrow">A New Chapter Begins</p>
+      
+      <div class="parents-grid">
+        <div class="parent-block">
+          <h3 class="serif">Preeti</h3>
+          <p class="eyebrow" style="margin-bottom: 5px;">Daughter of</p>
+          <p class="serif" style="font-size: 16px; color: var(--text-main);">
+            Mr. Umesh Bhende<br>&<br>Mrs. Apporva Bhende
+          </p>
+        </div>
+
+        <div class="parent-block">
+          <h3 class="serif">Aditya</h3>
+          <p class="eyebrow" style="margin-bottom: 5px;">Son of</p>
+          <p class="serif" style="font-size: 16px; color: var(--text-main);">
+            Our Beloved Family<br>&<br>Elders
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- Countdown -->
-  <section class="countdown">
-    <h2 class="section-title">Counting down</h2>
-    <p class="section-subtitle">OUR BIG DAY IS APPROACHING</p>
+  <section class="countdown fade-in">
+    <h2 class="section-title">The Countdown</h2>
+    <p class="eyebrow">Awaiting Our Forever</p>
 
     <div class="countdown-grid">
-      <div class="time-box">
-        <strong id="days">00</strong>
-        <span>DAYS</span>
-      </div>
-      <div class="time-box">
-        <strong id="hours">00</strong>
-        <span>HOURS</span>
-      </div>
-      <div class="time-box">
-        <strong id="minutes">00</strong>
-        <span>MINUTES</span>
-      </div>
-      <div class="time-box">
-        <strong id="seconds">00</strong>
-        <span>SECONDS</span>
-      </div>
+      <div class="time-box"><strong id="days">00</strong><span>DAYS</span></div>
+      <div class="time-box"><strong id="hours">00</strong><span>HRS</span></div>
+      <div class="time-box"><strong id="minutes">00</strong><span>MIN</span></div>
+      <div class="time-box"><strong id="seconds">00</strong><span>SEC</span></div>
     </div>
   </section>
 
   <!-- Events -->
-  <section class="events">
-    <h2 class="section-title">Celebrations</h2>
-    <p class="section-subtitle">FOUR MOMENTS · ONE BEAUTIFUL STORY</p>
+  <section class="events fade-in">
+    <h2 class="section-title">The Itinerary</h2>
+    <p class="eyebrow">Four Moments · One Story</p>
 
     <div class="event-container">
-      <div class="event-card haldi">
-        <div class="emoji">🌼</div>
-        <h3>Haldi</h3>
-        <p>2 January 2027<br>11:00 AM</p>
-        <p style="margin-top: 10px;">A splash of yellow, laughter and love.</p>
+      <div class="event-card">
+        <span class="event-icon">✧</span>
+        <h3 class="serif">Haldi</h3>
+        <p class="eyebrow">2 January 2027</p>
+        <p class="time">11:00 AM</p>
+        <p>A morning of traditions, laughter, and blessings to start our journey.</p>
       </div>
 
-      <div class="event-card mehendi">
-        <div class="emoji">🌿</div>
-        <h3>Mehendi</h3>
-        <p>2 January 2027<br>7:00 PM</p>
-        <p style="margin-top: 10px;">Mehendi, memories and beautiful beginnings.</p>
+      <div class="event-card">
+        <span class="event-icon">❀</span>
+        <h3 class="serif">Mehendi</h3>
+        <p class="eyebrow">2 January 2027</p>
+        <p class="time">7:00 PM</p>
+        <p>An intimate evening of beautiful henna patterns and celebration.</p>
       </div>
 
-      <div class="event-card sangeet">
-        <div class="emoji">✨</div>
-        <h3>Sangeet</h3>
-        <p>3 January 2027<br>7:00 PM</p>
-        <p style="margin-top: 10px;">Music, dance and unforgettable celebrations.<br>Vidyadhiraj Bhavan</p>
+      <div class="event-card">
+        <span class="event-icon">♪</span>
+        <h3 class="serif">Sangeet</h3>
+        <p class="eyebrow">3 January 2027</p>
+        <p class="time">7:00 PM</p>
+        <p>Music, dance, and unforgettable memories at Vidyadhiraj Bhavan.</p>
       </div>
 
-      <div class="event-card wedding">
-        <div class="emoji">💍</div>
-        <h3>Wedding</h3>
-        <p>4 January 2027<br>12:00 PM</p>
-        <p style="margin-top: 10px;">Two souls, one promise, a lifetime together.<br>Vidyadhiraj Bhavan</p>
+      <div class="event-card">
+        <span class="event-icon">♡</span>
+        <h3 class="serif">Wedding</h3>
+        <p class="eyebrow">4 January 2027</p>
+        <p class="time">12:00 PM</p>
+        <p>Two souls, one promise, a lifetime together at Vidyadhiraj Bhavan.</p>
       </div>
     </div>
   </section>
 
   <!-- Venue -->
-  <section class="venue-section">
+  <section class="venue-section fade-in">
     <h2 class="section-title">The Venue</h2>
-    <h3>Vidyadhiraj Bhavan</h3>
-    <p style="color: #636e72; line-height: 2;">
+    <h3 class="serif" style="font-size: 26px; color: var(--accent); margin: 15px 0;">Vidyadhiraj Bhavan</h3>
+    <p style="color: var(--text-light); font-size: 13px;">
       Navanagar, Hubli<br>
-      Behind Volkswagen Showroom<br>
-      Karnataka, India
+      Behind Volkswagen Showroom
     </p>
 
-    <a class="map-link"
-       href="https://www.google.com/maps/search/?api=1&query=Vidyadhiraj+Bhavan+Navanagar+Hubli"
-       target="_blank" rel="noopener">
-      VIEW LOCATION ↗
+    <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vidyadhiraj+Bhavan+Navanagar+Hubli" target="_blank" rel="noopener">
+      View Directions
     </a>
   </section>
 
   <!-- Closing -->
-  <section class="closing">
-    <h2>We can't wait to celebrate!</h2>
-    <p style="color: #2d3436;">YOUR PRESENCE WILL MAKE OUR DAY SPECIAL</p>
-    <div class="heart" style="color: #fff; margin: 20px 0;">♥</div>
-    <h2 style="color: #fff;">Aditya & Preeti</h2>
+  <section class="closing fade-in" style="max-width: 100%;">
+    <p class="eyebrow">We look forward to celebrating with you</p>
+    <h2>Aditya & Preeti</h2>
   </section>
 
   <footer>
@@ -590,6 +561,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const music = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
 
+  // Scroll Animations (Modern Fade-in)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
   // Update music button appearance
   function updateMusicButton() {
     if (!music || !musicToggle) return;
@@ -598,14 +580,10 @@ document.addEventListener("DOMContentLoaded", function () {
       musicToggle.textContent = "♫";
       musicToggle.classList.remove("playing");
       musicToggle.classList.add("paused");
-      musicToggle.setAttribute("aria-label", "Play music");
-      musicToggle.setAttribute("aria-pressed", "false");
     } else {
-      musicToggle.textContent = "Ⅱ";
+      musicToggle.innerHTML = "<span style='font-size:14px;'>||</span>";
       musicToggle.classList.remove("paused");
       musicToggle.classList.add("playing");
-      musicToggle.setAttribute("aria-label", "Pause music");
-      musicToggle.setAttribute("aria-pressed", "true");
     }
   }
 
@@ -631,9 +609,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       setTimeout(function () {
         welcomeScreen.style.display = "none";
-      }, 850);
+      }, 1000);
 
-      // Start music after visitor clicks
       playMusic();
       updateCountdown();
     });
@@ -662,28 +639,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const now = Date.now();
     const difference = weddingDate - now;
 
-    const daysElement = document.getElementById("days");
-    const hoursElement = document.getElementById("hours");
-    const minutesElement = document.getElementById("minutes");
-    const secondsElement = document.getElementById("seconds");
+    const elements = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
 
     if (difference <= 0) {
-      daysElement.textContent = "00";
-      hoursElement.textContent = "00";
-      minutesElement.textContent = "00";
-      secondsElement.textContent = "00";
+      Object.values(elements).forEach(el => el.textContent = "00");
       return;
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((difference / (1000 * 60)) % 60);
-    const seconds = Math.floor((difference / 1000) % 60);
-
-    daysElement.textContent = days;
-    hoursElement.textContent = String(hours).padStart(2, "0");
-    minutesElement.textContent = String(minutes).padStart(2, "0");
-    secondsElement.textContent = String(seconds).padStart(2, "0");
+    elements.days.textContent = Math.floor(difference / (1000 * 60 * 60 * 24));
+    elements.hours.textContent = String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2, "0");
+    elements.minutes.textContent = String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2, "0");
+    elements.seconds.textContent = String(Math.floor((difference / 1000) % 60)).padStart(2, "0");
   }
 
   updateCountdown();
@@ -693,7 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const backTop = document.getElementById("backTop");
   window.addEventListener("scroll", function () {
     if (backTop) {
-      backTop.style.display = window.scrollY > 400 ? "block" : "none";
+      backTop.style.display = window.scrollY > 500 ? "block" : "none";
     }
   });
 
@@ -702,7 +673,6 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
-
 });
 </script>
 
