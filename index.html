@@ -1,11 +1,572 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya ❤️ Preeti | Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fffaf7;
+  color: #55443f;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Welcome screen */
+#welcomeScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(circle at top left, #fff1e8, transparent 50%),
+    linear-gradient(135deg, #f8e8e3, #f8f0e5, #eee7f4);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+#welcomeScreen.closed {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.welcome-card {
+  padding: 45px 25px;
+  max-width: 550px;
+  width: 90%;
+}
+
+.welcome-card .small {
+  letter-spacing: 5px;
+  font-size: 12px;
+  color: #98766d;
+}
+
+.welcome-card h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(55px, 10vw, 90px);
+  color: #a64f57;
+  margin: 25px 0;
+  font-weight: 400;
+}
+
+.welcome-card p {
+  font-size: 13px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+.open-btn {
+  margin-top: 35px;
+  padding: 14px 35px;
+  border: 1px solid #bd8b83;
+  background: #fffaf6;
+  color: #89554f;
+  border-radius: 40px;
+  letter-spacing: 2px;
+  transition: .3s;
+}
+
+.open-btn:hover {
+  background: #a64f57;
+  color: white;
+}
+
+/* Main invitation */
+#invitation {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+}
+
+#invitation.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+section {
+  padding: 75px 20px;
+  text-align: center;
+}
+
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top left, #f9e7df, transparent 50%),
+    linear-gradient(135deg, #fff9f2, #f5e9ed, #f5eff8);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #99766d;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(65px, 12vw, 115px);
+  font-weight: 400;
+  color: #a64f57;
+  line-height: 1.25;
+  margin: 25px 0;
+}
+
+.heart {
+  color: #c77d81;
+  font-size: 28px;
+  margin: 5px;
+}
+
+.hero .date {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  letter-spacing: 3px;
+  color: #785c58;
+  margin-top: 15px;
+}
+
+.hero .venue {
+  font-size: 13px;
+  line-height: 2;
+  margin-top: 20px;
+  color: #806e68;
+}
+
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 55px;
+  font-weight: 400;
+  color: #a45e63;
+  margin-bottom: 18px;
+}
+
+.section-subtitle {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #987e75;
+  margin-bottom: 35px;
+}
+
+/* Parents */
+.parents {
+  background: #fffaf5;
+}
+
+.parent-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 2.2;
+  color: #795d56;
+}
+
+/* Countdown */
+.countdown {
+  background: #f5eae8;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  background: rgba(255,255,255,.7);
+  border: 1px solid #ead6d2;
+  border-radius: 18px;
+  width: 90px;
+  padding: 18px 8px;
+}
+
+.time-box strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: #a45e63;
+}
+
+.time-box span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #92766e;
+}
+
+/* Events */
+.events {
+  background: #fffaf7;
+}
+
+.event-container {
+  max-width: 950px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.event-card {
+  padding: 35px 22px;
+  border-radius: 28px;
+  border: 1px solid rgba(120,80,70,.12);
+  box-shadow: 0 8px 25px rgba(100,70,60,.06);
+  transition: transform .3s;
+}
+
+.event-card:hover {
+  transform: translateY(-7px);
+}
+
+.event-card .emoji {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.event-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.event-card p {
+  font-size: 12px;
+  line-height: 2;
+}
+
+.haldi {
+  background: linear-gradient(145deg, #fff8d9, #fff0b6);
+  color: #92712c;
+}
+
+.mehendi {
+  background: linear-gradient(145deg, #e8f2e5, #dcebdc);
+  color: #52734f;
+}
+
+.sangeet {
+  background: linear-gradient(145deg, #eee6f3, #e1dce9, #eee8ed);
+  color: #66556f;
+}
+
+.wedding {
+  background: linear-gradient(145deg, #f8e1df, #f2d0d0);
+  color: #9e454c;
+}
+
+/* Venue */
+.venue-section {
+  background: #f7eeeb;
+}
+
+.venue-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  margin: 15px 0;
+}
+
+.venue-section p {
+  font-size: 13px;
+  line-height: 2;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  color: white;
+  background: #a45e63;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* Closing */
+.closing {
+  background: linear-gradient(135deg, #f7e9e5, #f3eaf2);
+  padding: 90px 20px;
+}
+
+.closing h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 65px;
+  font-weight: 400;
+  color: #a64f57;
+}
+
+.closing p {
+  margin-top: 15px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+/* Music button */
+#musicToggle {
+  position: fixed;
+  bottom: 25px;
+  right: 22px;
+  z-index: 500;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #cda5a1;
+  background: #fff7f2;
+  color: #a45e63;
+  font-size: 23px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 18px rgba(0,0,0,.12);
+}
+
+#musicToggle.playing {
+  animation: musicPulse 2s infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(164,94,99,.2); }
+  50% { box-shadow: 0 0 0 9px rgba(164,94,99,0); }
+}
+
+/* Back to top */
+#backTop {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  z-index: 500;
+  background: #a45e63;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 19px;
+}
+
+footer {
+  padding: 25px;
+  text-align: center;
+  font-size: 11px;
+  color: #9b817a;
+  background: #fffaf7;
+}
+
+@media(max-width: 600px) {
+  section {
+    padding: 60px 18px;
+  }
+
+  .hero {
+    min-height: 85vh;
+  }
+
+  .time-box {
+    width: 72px;
+    padding: 14px 5px;
+  }
+
+  .time-box strong {
+    font-size: 25px;
+  }
+
+  .event-container {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Welcome screen -->
+<div id="welcomeScreen">
+  <div class="welcome-card">
+    <p class="small">TOGETHER WITH THEIR FAMILIES</p>
+    <h1>Aditya & Preeti</h1>
+    <p>REQUEST THE PLEASURE OF YOUR COMPANY</p>
+    <p>AS THEY BEGIN THEIR FOREVER</p>
+    <button class="open-btn" id="openInvitation">
+      OPEN INVITATION ♥
+    </button>
+  </div>
+</div>
+
+<!-- Music -->
+<audio id="weddingMusic" loop preload="auto">
+  <source src="./song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="paused"
+  aria-label="Play music" aria-pressed="false">♫</button>
+
+<!-- Invitation -->
+<main id="invitation">
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">A beautiful beginning</p>
+    <h1>Aditya <span class="heart">♥</span> Preeti</h1>
+    <p class="eyebrow">Two hearts · One forever</p>
+    <p class="date">04 . 01 . 2027</p>
+    <p class="venue">
+      Monday · 12:00 PM<br>
+      Vidyadhiraj Bhavan, Navanagar, Hubli
+    </p>
+  </section>
+
+  <!-- Parents -->
+  <section class="parents">
+    <h2 class="section-title">With the blessings of our families</h2>
+    <p class="section-subtitle">A NEW CHAPTER BEGINS</p>
+    <p class="parent-names">
+      Umesh Bhende<br>
+      & Apporva Bhende
+    </p>
+    <p style="margin-top:20px;font-size:13px;color:#987e75;">
+      Together with our loved ones, we invite you to celebrate our wedding.
+    </p>
+  </section>
+
+  <!-- Countdown -->
+  <section class="countdown">
+    <h2 class="section-title">Counting down to forever</h2>
+    <p class="section-subtitle">OUR BIG DAY IS APPROACHING</p>
+
+    <div class="countdown-grid">
+      <div class="time-box">
+        <strong id="days">00</strong>
+        <span>DAYS</span>
+      </div>
+      <div class="time-box">
+        <strong id="hours">00</strong>
+        <span>HOURS</span>
+      </div>
+      <div class="time-box">
+        <strong id="minutes">00</strong>
+        <span>MINUTES</span>
+      </div>
+      <div class="time-box">
+        <strong id="seconds">00</strong>
+        <span>SECONDS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="events">
+    <h2 class="section-title">Wedding Celebrations</h2>
+    <p class="section-subtitle">FOUR MOMENTS · ONE BEAUTIFUL STORY</p>
+
+    <div class="event-container">
+
+      <div class="event-card haldi">
+        <div class="emoji">🌼</div>
+        <h3>Haldi</h3>
+        <p>2 January 2027</p>
+        <p>11:00 AM</p>
+        <p>A splash of yellow, laughter and love.</p>
+        <p>Venue to be announced</p>
+      </div>
+
+      <div class="event-card mehendi">
+        <div class="emoji">🌿</div>
+        <h3>Mehendi</h3>
+        <p>2 January 2027</p>
+        <p>7:00 PM</p>
+        <p>Mehendi, memories and beautiful beginnings.</p>
+        <p>Venue to be announced</p>
+      </div>
+
+      <div class="event-card sangeet">
+        <div class="emoji">✨</div>
+        <h3>Sangeet</h3>
+        <p>3 January 2027</p>
+        <p>7:00 PM</p>
+        <p>Music, dance and unforgettable celebrations.</p>
+        <p>Vidyadhiraj Bhavan</p>
+      </div>
+
+      <div class="event-card wedding">
+        <div class="emoji">❤️</div>
+        <h3>Wedding</h3>
+        <p>4 January 2027</p>
+        <p>12:00 PM</p>
+        <p>Two souls, one promise, a lifetime together.</p>
+        <p>Vidyadhiraj Bhavan</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Venue -->
+  <section class="venue-section">
+    <h2 class="section-title">The Wedding Venue</h2>
+    <h3>Vidyadhiraj Bhavan</h3>
+    <p>
+      Navanagar, Hubli<br>
+      Behind Volkswagen Showroom<br>
+      Karnataka, India
+    </p>
+
+    <a class="map-link"
+       href="https://www.google.com/maps/search/?api=1&query=Vidyadhiraj+Bhavan+Navanagar+Hubli"
+       target="_blank" rel="noopener">
+      VIEW LOCATION ↗
+    </a>
+  </section>
+
+  <!-- Closing -->
+  <section class="closing">
+    <h2>We can't wait to celebrate with you!</h2>
+    <p>YOUR PRESENCE WILL MAKE OUR DAY SPECIAL</p>
+    <div class="heart">♥</div>
+    <h2>Aditya & Preeti</h2>
+  </section>
+
+  <footer>
+    Made with love · Aditya & Preeti · 2027
+  </footer>
+
+</main>
+
+<button id="backTop" aria-label="Back to top">↑</button>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
   const openButton = document.getElementById("openInvitation");
   const welcomeScreen = document.getElementById("welcomeScreen");
   const invitation = document.getElementById("invitation");
 
-  // Wedding music
   const music = document.getElementById("weddingMusic");
   const musicToggle = document.getElementById("musicToggle");
 
@@ -45,41 +606,33 @@ document.addEventListener("DOMContentLoaded", function () {
   if (openButton) {
     openButton.addEventListener("click", function () {
 
-      if (welcomeScreen) {
-        welcomeScreen.classList.add("closed");
-      }
-
-      if (invitation) {
-        invitation.classList.add("visible");
-      }
+      welcomeScreen.classList.add("closed");
+      invitation.classList.add("visible");
 
       document.body.style.overflow = "auto";
 
+      musicToggle.style.display = "flex";
+
       setTimeout(function () {
-        if (welcomeScreen) {
-          welcomeScreen.style.display = "none";
-        }
+        welcomeScreen.style.display = "none";
       }, 850);
 
-      // Start wedding music after visitor clicks
+      // Start music after visitor clicks
       playMusic();
 
-      // Start countdown
       updateCountdown();
     });
   }
 
-  // Music play/pause control
+  // Music play/pause
   if (musicToggle && music) {
     musicToggle.addEventListener("click", function () {
-
       if (music.paused) {
         playMusic();
       } else {
         music.pause();
         updateMusicButton();
       }
-
     });
 
     music.addEventListener("play", updateMusicButton);
@@ -93,7 +646,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateCountdown() {
 
     const weddingDate =
-      new Date("2027-01-04T11:38:00+05:30").getTime();
+      new Date("2027-01-04T12:00:00+05:30").getTime();
 
     const now = Date.now();
     const difference = weddingDate - now;
@@ -104,10 +657,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const secondsElement = document.getElementById("seconds");
 
     if (difference <= 0) {
-      if (daysElement) daysElement.textContent = "00";
-      if (hoursElement) hoursElement.textContent = "00";
-      if (minutesElement) minutesElement.textContent = "00";
-      if (secondsElement) secondsElement.textContent = "00";
+      daysElement.textContent = "00";
+      hoursElement.textContent = "00";
+      minutesElement.textContent = "00";
+      secondsElement.textContent = "00";
       return;
     }
 
@@ -127,22 +680,12 @@ document.addEventListener("DOMContentLoaded", function () {
       (difference / 1000) % 60
     );
 
-    if (daysElement) daysElement.textContent = days;
-
-    if (hoursElement) {
-      hoursElement.textContent = String(hours).padStart(2, "0");
-    }
-
-    if (minutesElement) {
-      minutesElement.textContent = String(minutes).padStart(2, "0");
-    }
-
-    if (secondsElement) {
-      secondsElement.textContent = String(seconds).padStart(2, "0");
-    }
+    daysElement.textContent = days;
+    hoursElement.textContent = String(hours).padStart(2, "0");
+    minutesElement.textContent = String(minutes).padStart(2, "0");
+    secondsElement.textContent = String(seconds).padStart(2, "0");
   }
 
-  // Update countdown every second
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
@@ -166,3 +709,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+</script>
+
+</body>
+</html>
+
