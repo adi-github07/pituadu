@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#EBE5DF">
+
+<title>Aditya & Preeti | Modern Wedding</title>
+<meta name="description" content="Join Aditya and Preeti as they celebrate their wedding on January 4, 2027, in Hubli.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Using an elegant serif for display and a sleek geometric sans for data -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-color: #EBE5DF; /* Chic Modern Beige */
+  --surface-color: #F3EFEA;
+  --surface-glass: rgba(243, 239, 234, 0.6);
+  --text-main: #1A1A18; /* Rich Charcoal */
+  --text-muted: #736E67;
+  --accent: #9A8460; /* Muted Gold */
+  --border: rgba(26, 26, 24, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: var(--text-main);
+  color: #fff;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--text-main);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover {
+  border-color: var(--text-main);
+  background: var(--text-main);
+  color: #fff;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+section {
+  padding: 12vh 0;
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-top {
+  position: absolute;
+  top: 5vh;
+  width: 100%;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  margin: 4vh 0;
+  text-transform: uppercase;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title .amp {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.7em;
+  margin-left: 10vw;
+}
+
+.hero-title .name-2 {
+  text-align: right;
+  padding-right: 5vw;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  margin-top: 6vh;
+}
+
+.hero-date {
+  font-size: 1.5rem;
+}
+
+/* COUNTDOWN */
+.countdown-wrapper {
+  background: var(--surface-color);
+  border-radius: 24px;
+  padding: 4rem;
+  text-align: center;
+  margin: 5vh 0;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 4vw;
+  margin-top: 3rem;
+}
+
+.count-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count-item strong {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* BENTO GRID EVENTS */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 4rem;
+}
+
+.event-card {
+  background: var(--surface-color);
+  border-radius: 24px;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 350px;
+}
+
+.event-card:hover {
+  transform: scale(0.98);
+}
+
+.event-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  color: var(--border);
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  line-height: 1;
+}
+
+.event-card h3 {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+.event-card.full-width {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-card.full-width .event-content {
+  max-width: 50%;
+}
+
+/* FAMILIES */
+.family-section {
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 8vh 0;
+}
+
+.family-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 10vh 0;
+}
+
+.footer h2 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin-bottom: 1rem;
+}
+
+/* MODERN MUSIC PLAYER (GLASSMORPHISM) */
+.music-glass {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 12px 24px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.music-glass:hover {
+  background: rgba(255,255,255,0.7);
+  transform: translateY(-3px);
+}
+
+.equalizer {
+  display: flex;
+  gap: 3px;
+  height: 12px;
+  align-items: center;
+}
+
+.bar {
+  width: 2px;
+  background: var(--text-main);
+  height: 4px;
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+.playing .bar {
+  animation: equalize 1s infinite alternate ease-in-out;
+}
+.playing .bar:nth-child(1) { animation-delay: 0.1s; }
+.playing .bar:nth-child(2) { animation-delay: 0.4s; }
+.playing .bar:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes equalize {
+  0% { height: 4px; }
+  100% { height: 12px; }
+}
+
+/* ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-card.full-width {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .event-card.full-width .event-content {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .countdown {
+    gap: 6vw;
+  }
+  .countdown-wrapper {
+    padding: 3rem 1.5rem;
+  }
+  .music-glass {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING MUSIC PLAYER -->
+<div class="music-glass" id="musicToggle">
+  <div class="equalizer" id="eq">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <span class="eyebrow" id="musicText" style="margin:0;">Play Audio</span>
+</div>
+
+<audio id="bgMusic" loop>
+  <!-- Ambient, modern romantic track placeholder -->
+  <source src="https://assets.mixkit.co/music/preview/mixkit-acoustic-guitar-wedding-890.mp3" type="audio/mpeg">
+</audio>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-top eyebrow">
+      ॥ श्री गणेशाय नमः ॥<br><br>
+      The Wedding Celebration Of
+    </div>
+    
+    <h1 class="hero-title">
+      <span class="name-1">Aditya</span>
+      <span class="amp">&</span>
+      <span class="name-2">Preeti</span>
+    </h1>
+
+    <div class="hero-meta">
+      <div>
+        <div class="eyebrow">Date</div>
+        <div class="hero-date serif">04 . 01 . 2027</div>
+      </div>
+      <div>
+        <div class="eyebrow">Location</div>
+        <div class="serif" style="font-size: 1.2rem;">Vidyadhiraj Bhavan, Hubli</div>
+      </div>
+      <a href="#events" class="btn">View Details</a>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="reveal">
+    <div class="countdown-wrapper">
+      <div class="eyebrow">The Countdown</div>
+      <h2 class="serif" style="font-size: 2.5rem; margin-top: 10px;">Two hearts, one journey.</h2>
+      
+      <div class="countdown" aria-label="Countdown">
+        <div class="count-item"><strong id="days">--</strong><span class="eyebrow">Days</span></div>
+        <div class="count-item"><strong id="hours">--</strong><span class="eyebrow">Hrs</span></div>
+        <div class="count-item"><strong id="minutes">--</strong><span class="eyebrow">Min</span></div>
+        <div class="count-item"><strong id="seconds">--</strong><span class="eyebrow">Sec</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS BENTO GRID -->
+  <section id="events" class="reveal">
+    <div class="eyebrow">The Itinerary</div>
+    <h2 class="serif" style="font-size: 3rem; margin-bottom: 2rem;">Moments to Cherish</h2>
+
+    <div class="events-grid">
+      
+      <!-- HALDI -->
+      <div class="event-card reveal">
+        <div class="event-num">01</div>
+        <div>
+          <div class="eyebrow">Sat, Jan 2 · 10:00 AM</div>
+          <h3>Haldi</h3>
+          <p style="color: var(--text-muted); margin-bottom: 2rem;">A morning filled with turmeric, laughter and blessings.</p>
+        </div>
+        <a class="btn btn-outline" href="https://share.google/bfJlqbEpwGcCXOpT9" target="_blank">Location ↗</a>
+      </div>
+
+      <!-- MEHENDI -->
+      <div class="event-card reveal">
+        <div class="event-num">02</div>
+        <div>
+          <div class="eyebrow">Sat, Jan 2 · 7:00 PM</div>
+          <h3>Mehendi</h3>
+          <p style="color: var(--text-muted); margin-bottom: 2rem;">An intimate celebration at home, filled with music and beautiful patterns.</p>
+        </div>
+        <div class="eyebrow">At Home</div>
+      </div>
+
+      <!-- SANGEET -->
+      <div class="event-card full-width reveal">
+        <div class="event-num">03</div>
+        <div class="event-content">
+          <div class="eyebrow">Sun, Jan 3 · 6:30 PM</div>
+          <h3 style="font-size: 3.5rem;">Sangeet</h3>
+          <p style="color: var(--text-muted);">An evening of music, dance, celebration and unforgettable memories.<br>Vidyadhiraj Bhavan, Hubli</p>
+        </div>
+        <a class="btn" href="https://share.google/l19DLfeLPZMRmF7h2" target="_blank">View Map ↗</a>
+      </div>
+
+      <!-- WEDDING -->
+      <div class="event-card full-width reveal" style="background: var(--text-main); color: var(--bg-color);">
+        <div class="event-num" style="color: rgba(255,255,255,0.1);">04</div>
+        <div class="event-content">
+          <div class="eyebrow" style="color: rgba(255,255,255,0.6);">Mon, Jan 4 · 11:38 AM</div>
+          <h3 style="font-size: 3.5rem;">The Wedding</h3>
+          <p style="color: rgba(255,255,255,0.8);">With blessings, traditions and promises for a lifetime.<br>Vidyadhiraj Bhavan, Hubli</p>
+        </div>
+        <a class="btn" style="background: #fff; color: var(--text-main); border:none;" href="https://share.google/l19DLfeLPZMRmF7h2" target="_blank">View Map ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAMILIES -->
+  <section class="family-section reveal">
+    <div class="eyebrow">With Love & Blessings</div>
+    <div class="family-grid">
+      <div>
+        <h3 class="serif" style="font-size: 2rem;">Preeti</h3>
+        <p class="eyebrow" style="margin-top: 10px;">Daughter of</p>
+        <p>Prasad & Pavitra Pai</p>
+      </div>
+      <div>
+        <h3 class="serif" style="font-size: 2rem;">Aditya</h3>
+        <p class="eyebrow" style="margin-top: 10px;">With blessings of</p>
+        <p>Our Loving Family</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer reveal">
+    <div class="eyebrow" style="margin-bottom: 1rem;">A forever kind of love</div>
+    <h2>Aditya & Preeti</h2>
+    <p class="eyebrow">04 . 01 . 2027 · Hubli</p>
+    <div class="serif" style="margin-top: 3rem; color: var(--accent); font-size: 1.2rem;">॥ शुभ विवाह ॥</div>
+  </footer>
+
+</main>
+
+<script>
+// --- SLEEK COUNTDOWN LOGIC ---
+const weddingDate = new Date("2027-01-04T11:38:00+05:30");
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = weddingDate.getTime() - now.getTime();
+  const elements = ["days", "hours", "minutes", "seconds"];
+
+  if (diff <= 0) {
+    elements.forEach(id => document.getElementById(id).textContent = "00");
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// --- CINEMATIC SCROLL REVEAL ---
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px"
+};
+
+const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('active');
+    observer.unobserve(entry.target);
+  });
+}, revealOptions);
+
+revealElements.forEach(el => revealOnScroll.observe(el));
+
+// --- GLASSMORPHISM MUSIC PLAYER ---
+const musicToggle = document.getElementById('musicToggle');
+const bgMusic = document.getElementById('bgMusic');
+const eq = document.getElementById('eq');
+const musicText = document.getElementById('musicText');
+let isPlaying = false;
+
+musicToggle.addEventListener('click', () => {
+  if (isPlaying) {
+    bgMusic.pause();
+    eq.classList.remove('playing');
+    musicText.innerText = 'Play Audio';
+  } else {
+    bgMusic.play();
+    eq.classList.add('playing');
+    musicText.innerText = 'Pause';
+  }
+  isPlaying = !isPlaying;
+});
+</script>
+
+</body>
+</html>
