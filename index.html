@@ -644,8 +644,8 @@ footer {
 
 <body>
 
-<!-- Envelope Welcome Screen (Tap Anywhere) -->
-<div id="welcomeScreen" role="button" tabindex="0" aria-label="Tap anywhere to open wedding invitation">
+<!-- Envelope Welcome Screen (Auto-opens + Tap Anywhere) -->
+<div id="welcomeScreen" role="button" tabindex="0" aria-label="Wedding invitation envelope">
   <div class="envelope-stage">
     <div class="envelope">
       
@@ -675,7 +675,7 @@ footer {
     </div>
   </div>
 
-  <p class="tap-hint">Tap anywhere to open</p>
+  <p class="tap-hint">Opening your invitation...</p>
 </div>
 
 <!-- Audio -->
@@ -820,6 +820,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const musicToggle = document.getElementById("musicToggle");
 
   let isOpened = false;
+  let autoScrollStopped = false;
+  let autoScrollFrame = null;
 
   // Scroll Animations (Modern Fade-in)
   const observer = new IntersectionObserver((entries) => {
@@ -854,10 +856,53 @@ document.addEventListener("DOMContentLoaded", function () {
       await music.play();
       updateMusicButton();
     } catch (error) {
-      console.log("Music playback failed:", error);
       updateMusicButton();
     }
   }
+
+  // Gentle auto-scroll down the invitation page
+  function startGentleAutoScroll() {
+    const scrollSpeed = 0.65; // Pixels per frame (~39px/sec for a slow, elegant read)
+
+    function step() {
+      if (autoScrollStopped) return;
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (window.scrollY < maxScroll) {
+        window.scrollBy(0, scrollSpeed);
+        autoScrollFrame = requestAnimationFrame(step);
+      }
+    }
+
+    autoScrollFrame = requestAnimationFrame(step);
+  }
+
+  // Stop auto-scroll immediately if the guest manually scrolls or touches the screen
+  function stopAutoScroll() {
+    autoScrollStopped = true;
+    if (autoScrollFrame) {
+      cancelAnimationFrame(autoScrollFrame);
+    }
+  }
+
+  window.addEventListener("wheel", stopAutoScroll, { passive: true });
+  window.addEventListener("touchstart", stopAutoScroll, { passive: true });
+  window.addEventListener("keydown", function (e) {
+    if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)) {
+      stopAutoScroll();
+    }
+  });
+
+  // Unlock audio on the guest's first interaction anywhere if browser blocked autoplay
+  function unlockAudioOnFirstGesture() {
+    if (music && music.paused) {
+      playMusic();
+    }
+    document.removeEventListener("touchstart", unlockAudioOnFirstGesture);
+    document.removeEventListener("click", unlockAudioOnFirstGesture);
+  }
+  document.addEventListener("touchstart", unlockAudioOnFirstGesture, { passive: true });
+  document.addEventListener("click", unlockAudioOnFirstGesture);
 
   // Smooth Envelope Sequence
   function handleOpenEnvelope() {
@@ -874,12 +919,18 @@ document.addEventListener("DOMContentLoaded", function () {
       welcomeScreen.classList.add("closed");
       document.body.style.overflow = "auto";
       musicToggle.style.display = "flex";
+
+      // Begin slow downward scroll 1.5s after the main invitation finishes fading in
+      setTimeout(startGentleAutoScroll, 1500);
     }, 1850);
 
     setTimeout(function () {
       welcomeScreen.style.display = "none";
     }, 3200);
   }
+
+  // Automatically trigger envelope opening shortly after page loads (and allow immediate tap)
+  setTimeout(handleOpenEnvelope, 900);
 
   if (welcomeScreen) {
     welcomeScreen.addEventListener("click", handleOpenEnvelope);
@@ -893,7 +944,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Music play/pause
   if (musicToggle && music) {
-    musicToggle.addEventListener("click", function () {
+    musicToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
       if (music.paused) {
         playMusic();
       } else {
@@ -945,6 +997,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (backTop) {
     backTop.addEventListener("click", function () {
+      stopAutoScroll();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
