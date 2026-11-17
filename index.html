@@ -644,7 +644,7 @@ footer {
 
 <body>
 
-<!-- Envelope Welcome Screen (Auto-opens + Tap Anywhere) -->
+<!-- Envelope Welcome Screen (Auto-opens after 2 seconds + Tap Anywhere) -->
 <div id="welcomeScreen" role="button" tabindex="0" aria-label="Wedding invitation envelope">
   <div class="envelope-stage">
     <div class="envelope">
@@ -675,7 +675,7 @@ footer {
     </div>
   </div>
 
-  <p class="tap-hint">Opening your invitation...</p>
+  <p class="tap-hint">Tap anywhere or wait to open</p>
 </div>
 
 <!-- Audio -->
@@ -821,7 +821,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isOpened = false;
   let autoScrollStopped = false;
-  let autoScrollTimer = null;
 
   // Scroll Animations (Modern Fade-in)
   const observer = new IntersectionObserver((entries) => {
@@ -860,36 +859,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Smooth continuous auto-scroll all the way down to the footer
+  // Smooth robust auto-scroll loop using requestAnimationFrame
   function startGentleAutoScroll() {
-    if (autoScrollStopped) return;
+    const scrollSpeed = 0.55; // Smooth slow scroll speed
 
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const currentScroll = window.scrollY;
+    function step() {
+      if (autoScrollStopped) return;
 
-    if (currentScroll < maxScroll && !autoScrollStopped) {
-      // Smoothly scroll down by 1 pixel every 25ms (~40px per second)
-      window.scrollBy({ top: 1, behavior: 'auto' });
-      autoScrollTimer = setTimeout(startGentleAutoScroll, 25);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (window.scrollY < maxScroll) {
+        window.scrollBy({ top: scrollSpeed, behavior: 'auto' });
+        requestAnimationFrame(step);
+      }
     }
+
+    requestAnimationFrame(step);
   }
 
-  // Stop auto-scroll immediately if the user interacts
+  // Stop auto-scroll immediately if the user touches or scrolls manually
   function stopAutoScroll() {
     autoScrollStopped = true;
-    if (autoScrollTimer) {
-      clearTimeout(autoScrollTimer);
-    }
   }
 
   window.addEventListener("wheel", stopAutoScroll, { passive: true });
   window.addEventListener("touchstart", stopAutoScroll, { passive: true });
   window.addEventListener("mousedown", stopAutoScroll, { passive: true });
-  window.addEventListener("keydown", function (e) {
-    if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)) {
-      stopAutoScroll();
-    }
-  });
+  window.addEventListener("keydown", stopAutoScroll, { passive: true });
 
   // Unlock audio on first touch if autoplay was restricted
   function unlockAudioOnFirstGesture() {
@@ -918,8 +913,8 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.style.overflow = "auto";
       musicToggle.style.display = "flex";
 
-      // Begin continuous slow scroll down to the bottom (Haldi, Itinerary, Venue, Footer) 1.5s after opening
-      setTimeout(startGentleAutoScroll, 1500);
+      // Begin continuous slow scroll down to the bottom after fade-in
+      setTimeout(startGentleAutoScroll, 1200);
     }, 1850);
 
     setTimeout(function () {
@@ -927,8 +922,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3200);
   }
 
-  // Automatically trigger envelope opening shortly after page load
-  setTimeout(handleOpenEnvelope, 900);
+  // Automatically trigger envelope opening after exactly 2 seconds (plus allow immediate tap)
+  setTimeout(handleOpenEnvelope, 2000);
 
   if (welcomeScreen) {
     welcomeScreen.addEventListener("click", handleOpenEnvelope);
