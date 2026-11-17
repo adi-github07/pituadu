@@ -135,7 +135,7 @@ h1, h2, h3, .serif {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Card tucked inside the envelope pocket (z-index: 2 stays cleanly between back & front pocket) */
+/* Card tucked inside the envelope pocket */
 .envelope-card {
   position: absolute;
   left: 6%;
@@ -151,7 +151,7 @@ h1, h2, h3, .serif {
   align-items: center;
   justify-content: center;
   text-align: center;
-  z-index: 2; /* Always stays inside the pocket! */
+  z-index: 2;
   box-shadow: 0 4px 15px rgba(84, 63, 62, 0.08);
   will-change: transform;
   transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, box-shadow 1.15s ease 0.45s;
@@ -174,12 +174,12 @@ h1, h2, h3, .serif {
 
 .envelope-card .card-date {
   font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  letter-spacing: 3px;
+  font-size: 11px;
+  letter-spacing: 2px;
   color: var(--text-main);
 }
 
-/* Envelope Front Pocket (Left, Right, Bottom folds - z-index: 3 sits IN FRONT of card) */
+/* Envelope Front Pocket (Left, Right, Bottom folds) */
 .envelope-pocket {
   position: absolute;
   inset: 0;
@@ -208,7 +208,7 @@ h1, h2, h3, .serif {
   filter: drop-shadow(0 -2px 4px rgba(84, 63, 62, 0.06));
 }
 
-/* Top Envelope Flap (Starts at z-index: 5, drops behind card to z-index: 1 once opened) */
+/* Top Envelope Flap */
 .envelope-flap {
   position: absolute;
   top: 0;
@@ -295,10 +295,9 @@ h1, h2, h3, .serif {
 
 #welcomeScreen.opening .envelope-flap {
   transform: rotateX(180deg);
-  z-index: 1; /* Sits cleanly behind the rising card */
+  z-index: 1;
 }
 
-/* Card glides upward smoothly while its bottom edge remains tucked inside the pocket */
 #welcomeScreen.opening .envelope-card {
   transform: translateY(-64%);
   box-shadow: 0 15px 35px rgba(84, 63, 62, 0.14);
@@ -363,7 +362,7 @@ section {
 
 .hero .date {
   font-size: 18px;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   margin-top: 15px;
 }
 
@@ -657,7 +656,7 @@ footer {
       <div class="envelope-card">
         <span class="card-eyebrow">Wedding Invitation</span>
         <h2>Preeti & Aditya</h2>
-        <span class="card-date">04 . 01 . 2027</span>
+        <span class="card-date">04 . 01 . 2027 &nbsp;|&nbsp; 11:38 AM</span>
       </div>
 
       <!-- Left, Right, Bottom Envelope Folds -->
@@ -694,7 +693,7 @@ footer {
     <p class="eyebrow">The Wedding Celebration Of</p>
     <h1>Preeti <span>&</span> Aditya</h1>
     <div class="hero-divider"></div>
-    <p class="date serif">04 . 01 . 2027</p>
+    <p class="date serif">04 . 01 . 2027 &nbsp;|&nbsp; 11:38 AM</p>
     <p class="eyebrow" style="margin-top: 20px;">Vidyadhiraj Bhavan, Hubli</p>
   </section>
 
@@ -776,7 +775,7 @@ footer {
         <span class="event-icon">♡</span>
         <h3 class="serif">Wedding</h3>
         <p class="eyebrow">4 January 2027</p>
-        <p class="time">12:00 PM</p>
+        <p class="time">11:38 AM</p>
         <p>Two souls, one promise, a lifetime together at Vidyadhiraj Bhavan.</p>
       </div>
 
@@ -860,7 +859,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Smooth Envelope Sequence without abrupt z-index snapping
+  // Smooth Envelope Sequence
   function handleOpenEnvelope() {
     if (isOpened) return;
     isOpened = true;
@@ -909,9 +908,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateMusicButton();
 
-  // Wedding countdown
+  // Wedding countdown (Synced to 11:38 AM IST)
   function updateCountdown() {
-    const weddingDate = new Date("2027-01-04T12:00:00+05:30").getTime();
+    const weddingDate = new Date("2027-01-04T11:38:00+05:30").getTime();
     const now = Date.now();
     const difference = weddingDate - now;
 
