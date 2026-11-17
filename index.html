@@ -811,5 +811,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (welcomeScreen) {
     welcomeScreen.addEventListener("click", handleOpenScroll);
-    welcomeScreen.addEventListener("keydown
-                                   
+    welcomeScreen.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleOpenScroll();
+      }
+    });
+  }
+
+  if (musicToggle && music) {
+    musicToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (music.paused) playMusic();
+      else { music.pause(); updateMusicButton(); }
+    });
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+    music.addEventListener("ended", updateMusicButton);
+  }
+
+  updateMusicButton();
+
+  function updateCountdown() {
+    const weddingDate = new Date("2027-01-04T11:38:00+05:30").getTime();
+    const now = Date.now();
+    const difference = weddingDate - now;
+
+    const elements = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
+
+    if (difference <= 0) {
+      Object.values(elements).forEach(el => el.textContent = "00");
+      return;
+    }
+
+    elements.days.textContent = Math.floor(difference / (1000 * 60 * 60 * 24));
+    elements.hours.textContent = String(Math.floor((difference / (1000 * 60 * 60)) % 24)).padStart(2, "0");
+    elements.minutes.textContent = String(Math.floor((difference / (1000 * 60)) % 60)).padStart(2, "0");
+    elements.seconds.textContent = String(Math.floor((difference / 1000) % 60)).padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  const backTop = document.getElementById("backTop");
+  window.addEventListener("scroll", function () {
+    if (backTop) {
+      backTop.style.display = window.scrollY > 500 ? "block" : "none";
+    }
+  });
+
+  if (backTop) {
+    backTop.addEventListener("click", function () {
+      stopAutoScroll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+});
+</script>
+
+</body>
+</html>
