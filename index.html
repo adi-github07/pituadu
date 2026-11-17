@@ -821,7 +821,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isOpened = false;
   let autoScrollStopped = false;
-  let autoScrollFrame = null;
+  let autoScrollTimer = null;
 
   // Scroll Animations (Modern Fade-in)
   const observer = new IntersectionObserver((entries) => {
@@ -860,40 +860,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Gentle auto-scroll down the invitation page
+  // Smooth continuous auto-scroll all the way down to the footer
   function startGentleAutoScroll() {
-    const scrollSpeed = 0.65; // Pixels per frame (~39px/sec for a slow, elegant read)
+    if (autoScrollStopped) return;
 
-    function step() {
-      if (autoScrollStopped) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const currentScroll = window.scrollY;
 
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (window.scrollY < maxScroll) {
-        window.scrollBy(0, scrollSpeed);
-        autoScrollFrame = requestAnimationFrame(step);
-      }
+    if (currentScroll < maxScroll && !autoScrollStopped) {
+      // Smoothly scroll down by 1 pixel every 25ms (~40px per second)
+      window.scrollBy({ top: 1, behavior: 'auto' });
+      autoScrollTimer = setTimeout(startGentleAutoScroll, 25);
     }
-
-    autoScrollFrame = requestAnimationFrame(step);
   }
 
-  // Stop auto-scroll immediately if the guest manually scrolls or touches the screen
+  // Stop auto-scroll immediately if the user interacts
   function stopAutoScroll() {
     autoScrollStopped = true;
-    if (autoScrollFrame) {
-      cancelAnimationFrame(autoScrollFrame);
+    if (autoScrollTimer) {
+      clearTimeout(autoScrollTimer);
     }
   }
 
   window.addEventListener("wheel", stopAutoScroll, { passive: true });
   window.addEventListener("touchstart", stopAutoScroll, { passive: true });
+  window.addEventListener("mousedown", stopAutoScroll, { passive: true });
   window.addEventListener("keydown", function (e) {
     if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)) {
       stopAutoScroll();
     }
   });
 
-  // Unlock audio on the guest's first interaction anywhere if browser blocked autoplay
+  // Unlock audio on first touch if autoplay was restricted
   function unlockAudioOnFirstGesture() {
     if (music && music.paused) {
       playMusic();
@@ -920,7 +918,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.style.overflow = "auto";
       musicToggle.style.display = "flex";
 
-      // Begin slow downward scroll 1.5s after the main invitation finishes fading in
+      // Begin continuous slow scroll down to the bottom (Haldi, Itinerary, Venue, Footer) 1.5s after opening
       setTimeout(startGentleAutoScroll, 1500);
     }, 1850);
 
@@ -929,7 +927,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3200);
   }
 
-  // Automatically trigger envelope opening shortly after page loads (and allow immediate tap)
+  // Automatically trigger envelope opening shortly after page load
   setTimeout(handleOpenEnvelope, 900);
 
   if (welcomeScreen) {
