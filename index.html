@@ -62,7 +62,7 @@ h1, h2, h3, .serif {
 }
 
 /* =========================================
-   ENVELOPE WELCOME SCREEN (ULTRA-SMOOTH)
+   ENVELOPE WELCOME SCREEN (ZERO OVERLAP)
    ========================================= */
 #welcomeScreen {
   position: fixed;
@@ -74,7 +74,7 @@ h1, h2, h3, .serif {
   justify-content: center;
   background: radial-gradient(circle at center, #fff7f5 0%, #f3d5d0 100%);
   cursor: pointer;
-  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.4s;
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.3s;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   will-change: opacity;
@@ -91,20 +91,21 @@ h1, h2, h3, .serif {
   width: min(360px, 88vw);
   height: min(240px, 58vw);
   perspective: 1400px;
-  margin-top: 20px;
-  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 40px;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 
-#welcomeScreen.closed .envelope-stage {
-  transform: scale(1.06) translateY(-12px);
+/* Gently push envelope down as card rises so everything stays centered */
+#welcomeScreen.opening .envelope-stage {
+  transform: translateY(45px);
 }
 
 .envelope {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #f5efe6; /* Ivory base */
+  background: #ebe0cf; /* Darker ivory inside the envelope cavity */
   border-radius: 6px;
   box-shadow: 0 25px 50px rgba(84, 63, 62, 0.16), 0 5px 15px rgba(84, 63, 62, 0.08);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -115,7 +116,7 @@ h1, h2, h3, .serif {
   transform: translateY(-4px);
 }
 
-/* Subtle embossed names on the envelope body */
+/* Subtle embossed names on the front of the envelope */
 .envelope-watermark {
   position: absolute;
   bottom: 14%;
@@ -124,7 +125,6 @@ h1, h2, h3, .serif {
   text-align: center;
   z-index: 4;
   pointer-events: none;
-  transition: opacity 0.6s ease;
 }
 
 .envelope-watermark span {
@@ -135,13 +135,13 @@ h1, h2, h3, .serif {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Card inside the envelope */
+/* Card tucked inside the envelope pocket (z-index: 2 stays cleanly between back & front pocket) */
 .envelope-card {
   position: absolute;
   left: 6%;
   right: 6%;
-  bottom: 8%;
-  height: 84%;
+  bottom: 6%;
+  height: 86%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -151,10 +151,9 @@ h1, h2, h3, .serif {
   align-items: center;
   justify-content: center;
   text-align: center;
-  z-index: 2;
+  z-index: 2; /* Always stays inside the pocket! */
   box-shadow: 0 4px 15px rgba(84, 63, 62, 0.08);
   will-change: transform;
-  /* Smooth delayed rise after flap begins opening */
   transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, box-shadow 1.15s ease 0.45s;
 }
 
@@ -180,7 +179,7 @@ h1, h2, h3, .serif {
   color: var(--text-main);
 }
 
-/* Envelope Pocket (Left, Right, Bottom folds) */
+/* Envelope Front Pocket (Left, Right, Bottom folds - z-index: 3 sits IN FRONT of card) */
 .envelope-pocket {
   position: absolute;
   inset: 0;
@@ -209,7 +208,7 @@ h1, h2, h3, .serif {
   filter: drop-shadow(0 -2px 4px rgba(84, 63, 62, 0.06));
 }
 
-/* Top Envelope Flap */
+/* Top Envelope Flap (Starts at z-index: 5, drops behind card to z-index: 1 once opened) */
 .envelope-flap {
   position: absolute;
   top: 0;
@@ -220,7 +219,7 @@ h1, h2, h3, .serif {
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
   will-change: transform;
-  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, z-index 0s 0.45s;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1) 0.1s, z-index 0s 0.4s;
   z-index: 5;
   filter: drop-shadow(0 4px 6px rgba(84, 63, 62, 0.12));
 }
@@ -247,7 +246,6 @@ h1, h2, h3, .serif {
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 
-/* Inner stamped ring of the wax seal */
 .wax-seal::before {
   content: '';
   position: absolute;
@@ -297,13 +295,13 @@ h1, h2, h3, .serif {
 
 #welcomeScreen.opening .envelope-flap {
   transform: rotateX(180deg);
-  z-index: 1;
+  z-index: 1; /* Sits cleanly behind the rising card */
 }
 
+/* Card glides upward smoothly while its bottom edge remains tucked inside the pocket */
 #welcomeScreen.opening .envelope-card {
-  transform: translateY(-58%);
-  z-index: 4;
-  box-shadow: 0 20px 45px rgba(84, 63, 62, 0.18);
+  transform: translateY(-64%);
+  box-shadow: 0 15px 35px rgba(84, 63, 62, 0.14);
 }
 
 /* =========================================
@@ -862,20 +860,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Smooth Envelope Sequence:
-  // 0.0s: Seal dissolves -> 0.15s: Flap lifts -> 0.45s: Card glides out -> 1.85s: Crossfade into invitation page
+  // Smooth Envelope Sequence without abrupt z-index snapping
   function handleOpenEnvelope() {
     if (isOpened) return;
     isOpened = true;
 
-    // 1. Trigger music immediately on user gesture
     playMusic();
     updateCountdown();
 
-    // 2. Break seal, lift flap upwards, and smoothly glide card out
     welcomeScreen.classList.add("opening");
 
-    // 3. Crossfade envelope out while gently gliding invitation website in
     setTimeout(function () {
       invitation.classList.add("visible");
       welcomeScreen.classList.add("closed");
@@ -883,10 +877,9 @@ document.addEventListener("DOMContentLoaded", function () {
       musicToggle.style.display = "flex";
     }, 1850);
 
-    // 4. Clean up overlay from layout after fade finishes
     setTimeout(function () {
       welcomeScreen.style.display = "none";
-    }, 3300);
+    }, 3200);
   }
 
   if (welcomeScreen) {
