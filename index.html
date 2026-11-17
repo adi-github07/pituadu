@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya & Preeti | Wedding Invitation</title>
+<title>Preeti & Aditya | Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -62,7 +62,7 @@ h1, h2, h3, .serif {
 }
 
 /* =========================================
-   ENVELOPE WELCOME SCREEN
+   ENVELOPE WELCOME SCREEN (ULTRA-SMOOTH)
    ========================================= */
 #welcomeScreen {
   position: fixed;
@@ -74,14 +74,15 @@ h1, h2, h3, .serif {
   justify-content: center;
   background: radial-gradient(circle at center, #fff7f5 0%, #f3d5d0 100%);
   cursor: pointer;
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.4s;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  will-change: opacity;
 }
 
 #welcomeScreen.closed {
   opacity: 0;
-  transform: scale(1.04);
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -89,8 +90,14 @@ h1, h2, h3, .serif {
   position: relative;
   width: min(360px, 88vw);
   height: min(240px, 58vw);
-  perspective: 1200px;
-  margin-top: 30px;
+  perspective: 1400px;
+  margin-top: 20px;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+#welcomeScreen.closed .envelope-stage {
+  transform: scale(1.06) translateY(-12px);
 }
 
 .envelope {
@@ -99,11 +106,12 @@ h1, h2, h3, .serif {
   height: 100%;
   background: #f5efe6; /* Ivory base */
   border-radius: 6px;
-  box-shadow: 0 25px 50px rgba(84, 63, 62, 0.18), 0 5px 15px rgba(84, 63, 62, 0.08);
-  transition: transform 0.6s ease;
+  box-shadow: 0 25px 50px rgba(84, 63, 62, 0.16), 0 5px 15px rgba(84, 63, 62, 0.08);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
 }
 
-#welcomeScreen:hover .envelope {
+#welcomeScreen:not(.opening):hover .envelope {
   transform: translateY(-4px);
 }
 
@@ -116,6 +124,7 @@ h1, h2, h3, .serif {
   text-align: center;
   z-index: 4;
   pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
 .envelope-watermark span {
@@ -144,7 +153,9 @@ h1, h2, h3, .serif {
   text-align: center;
   z-index: 2;
   box-shadow: 0 4px 15px rgba(84, 63, 62, 0.08);
-  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+  will-change: transform;
+  /* Smooth delayed rise after flap begins opening */
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, box-shadow 1.15s ease 0.45s;
 }
 
 .envelope-card .card-eyebrow {
@@ -208,7 +219,8 @@ h1, h2, h3, .serif {
   background: linear-gradient(180deg, #fcf8f2 0%, #ede2d2 100%);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.35s;
+  will-change: transform;
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, z-index 0s 0.45s;
   z-index: 5;
   filter: drop-shadow(0 4px 6px rgba(84, 63, 62, 0.12));
 }
@@ -218,7 +230,7 @@ h1, h2, h3, .serif {
   position: absolute;
   top: 52%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -231,7 +243,8 @@ h1, h2, h3, .serif {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  will-change: transform, opacity;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 
 /* Inner stamped ring of the wax seal */
@@ -261,7 +274,7 @@ h1, h2, h3, .serif {
   text-transform: uppercase;
   color: var(--text-light);
   animation: pulseHint 2.2s infinite ease-in-out;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
 @keyframes pulseHint {
@@ -278,7 +291,7 @@ h1, h2, h3, .serif {
 }
 
 #welcomeScreen.opening .wax-seal {
-  transform: translate(-50%, -50%) scale(0.85);
+  transform: translate(-50%, -50%) scale(0.75);
   opacity: 0;
 }
 
@@ -288,9 +301,9 @@ h1, h2, h3, .serif {
 }
 
 #welcomeScreen.opening .envelope-card {
-  transform: translateY(-68%);
+  transform: translateY(-58%);
   z-index: 4;
-  box-shadow: 0 15px 35px rgba(84, 63, 62, 0.16);
+  box-shadow: 0 20px 45px rgba(84, 63, 62, 0.18);
 }
 
 /* =========================================
@@ -298,12 +311,15 @@ h1, h2, h3, .serif {
    ========================================= */
 #invitation {
   opacity: 0;
+  transform: translateY(18px);
   visibility: hidden;
-  transition: opacity 1.5s ease;
+  transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 #invitation.visible {
   opacity: 1;
+  transform: translateY(0);
   visibility: visible;
 }
 
@@ -642,7 +658,7 @@ footer {
       <!-- Inner Sliding Card -->
       <div class="envelope-card">
         <span class="card-eyebrow">Wedding Invitation</span>
-        <h2>Aditya & Preeti</h2>
+        <h2>Preeti & Aditya</h2>
         <span class="card-date">04 . 01 . 2027</span>
       </div>
 
@@ -651,12 +667,12 @@ footer {
 
       <!-- Subtle Names on Envelope -->
       <div class="envelope-watermark">
-        <span>Aditya & Preeti</span>
+        <span>Preeti & Aditya</span>
       </div>
 
       <!-- Wax Seal -->
       <div class="wax-seal">
-        <span>A&amp;P</span>
+        <span>P&amp;A</span>
       </div>
 
     </div>
@@ -678,7 +694,7 @@ footer {
   <!-- Hero -->
   <section class="hero fade-in">
     <p class="eyebrow">The Wedding Celebration Of</p>
-    <h1>Aditya <span>&</span> Preeti</h1>
+    <h1>Preeti <span>&</span> Aditya</h1>
     <div class="hero-divider"></div>
     <p class="date serif">04 . 01 . 2027</p>
     <p class="eyebrow" style="margin-top: 20px;">Vidyadhiraj Bhavan, Hubli</p>
@@ -692,21 +708,21 @@ footer {
       
       <div class="parents-grid">
         
+        <!-- Bride's Parents (First) -->
+        <div class="parent-block">
+          <h3 class="serif">Preeti</h3>
+          <p class="eyebrow" style="margin-bottom: 5px;">Daughter of</p>
+          <p class="serif" style="font-size: 16px; color: var(--text-main);">
+            Mr. Prasad Pai<br>&<br>Mrs. Pavitra Pai
+          </p>
+        </div>
+
         <!-- Groom's Parents -->
         <div class="parent-block">
           <h3 class="serif">Aditya</h3>
           <p class="eyebrow" style="margin-bottom: 5px;">Son of</p>
           <p class="serif" style="font-size: 16px; color: var(--text-main);">
             Mr. Umesh Bhende<br>&<br>Mrs. Apporva Bhende
-          </p>
-        </div>
-
-        <!-- Bride's Parents -->
-        <div class="parent-block">
-          <h3 class="serif">Preeti</h3>
-          <p class="eyebrow" style="margin-bottom: 5px;">Daughter of</p>
-          <p class="serif" style="font-size: 16px; color: var(--text-main);">
-            Mr. Prasad Pai<br>&<br>Mrs. Pavitra Pai
           </p>
         </div>
 
@@ -786,11 +802,11 @@ footer {
   <!-- Closing -->
   <section class="closing fade-in" style="max-width: 100%;">
     <p class="eyebrow">We look forward to celebrating with you</p>
-    <h2>Aditya & Preeti</h2>
+    <h2>Preeti & Aditya</h2>
   </section>
 
   <footer>
-    Made with love · Aditya & Preeti · 2027
+    Made with love · Preeti & Aditya · 2027
   </footer>
 
 </main>
@@ -846,7 +862,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Envelope Sequence: Tap anywhere -> Flap opens -> Card slides out -> Main site reveals
+  // Smooth Envelope Sequence:
+  // 0.0s: Seal dissolves -> 0.15s: Flap lifts -> 0.45s: Card glides out -> 1.85s: Crossfade into invitation page
   function handleOpenEnvelope() {
     if (isOpened) return;
     isOpened = true;
@@ -855,21 +872,21 @@ document.addEventListener("DOMContentLoaded", function () {
     playMusic();
     updateCountdown();
 
-    // 2. Break seal, lift flap upwards, and slide card out
+    // 2. Break seal, lift flap upwards, and smoothly glide card out
     welcomeScreen.classList.add("opening");
 
-    // 3. Reveal main invitation website smoothly after card slides out
+    // 3. Crossfade envelope out while gently gliding invitation website in
     setTimeout(function () {
-      welcomeScreen.classList.add("closed");
       invitation.classList.add("visible");
+      welcomeScreen.classList.add("closed");
       document.body.style.overflow = "auto";
       musicToggle.style.display = "flex";
-    }, 1550);
+    }, 1850);
 
-    // 4. Remove overlay from DOM flow once faded out
+    // 4. Clean up overlay from layout after fade finishes
     setTimeout(function () {
       welcomeScreen.style.display = "none";
-    }, 2550);
+    }, 3300);
   }
 
   if (welcomeScreen) {
